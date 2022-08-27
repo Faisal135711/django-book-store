@@ -28,7 +28,7 @@ class Book(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name_plural = 'Products'
+        verbose_name_plural = 'Books'
         ordering = ('-created',)
 
     def __str__(self):
