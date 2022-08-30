@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Book)
-class ProductAdmin(admin.ModelAdmin):
+class Book(admin.ModelAdmin):
     list_display = ['title', 'author', 'slug', 'price', 
                     'in_stock', 'created', 'updated']
     list_filter = ['in_stock', 'is_active']
