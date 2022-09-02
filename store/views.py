@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from store.models import Category, Book 
 
@@ -11,3 +11,8 @@ def categories(request):
 def all_books(request):
     books = Book.objects.all()
     return render(request, 'store/home.html', {'books': books})
+
+
+def book_detail(request, slug):
+    book = get_object_or_404(Book, slug=slug, in_stock=True)
+    return render(request, 'store/books/detail.html', {'book': book})
