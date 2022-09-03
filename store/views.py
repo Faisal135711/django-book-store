@@ -10,7 +10,7 @@ def book_all(request):
 
 def book_detail(request, slug):
     book = get_object_or_404(Book, slug=slug, in_stock=True)
-    return render(request, 'store/books/detail.html', {'book': book})
+    return render(request, 'store/books/book.html', {'book': book})
 
 
 def category_detail(request, slug):
