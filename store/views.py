@@ -4,7 +4,7 @@ from store.models import Book, Category
 
 
 def all_books(request):
-    books = Book.objects.all()
+    books = Book.books.all()
     return render(request, 'store/home.html', {'books': books})
 
 
