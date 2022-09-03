@@ -3,12 +3,6 @@ from django.shortcuts import get_object_or_404, render
 from store.models import Book, Category
 
 
-def categories(request):
-    return {
-        'categories': Category.objects.all()
-    }
-
-
 def all_books(request):
     books = Book.objects.all()
     return render(request, 'store/home.html', {'books': books})
