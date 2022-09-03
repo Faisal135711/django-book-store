@@ -1,12 +1,12 @@
-from django.test import TestCase, Client, RequestFactory
-from django.urls import reverse
+from unittest import skip
+
+from django.contrib.auth.models import User
 from django.http import HttpRequest
-from django.contrib.auth.models import User 
+from django.test import Client, RequestFactory, TestCase
+from django.urls import reverse
 
-from store.models import Category, Book
+from store.models import Book, Category
 from store.views import all_books
-
-from unittest import skip 
 
 # Create your tests here.
 # @skip('demonstrating skipping')

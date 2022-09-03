@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
-from store.models import Category, Book 
+from store.models import Book, Category
+
 
 def categories(request):
     return {
