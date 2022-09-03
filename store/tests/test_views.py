@@ -6,7 +6,7 @@ from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
 
 from store.models import Book, Category
-from store.views import all_books
+from store.views import book_all
 
 # Create your tests here.
 # @skip('demonstrating skipping')
@@ -29,8 +29,11 @@ class TestViewResponses(TestCase):
 
 
     def test_url_allowed_hosts(self):
-        response = self.client.get("/")
+        response = self.client.get("/", HTTP_HOST='myaddress.com')
+        self.assertEqual(response.status_code, 400)
+        response = self.client.get("/", HTTP_HOST='mydomain.com')
         self.assertEqual(response.status_code, 200)
+        
 
     def test_book_detail_url(self):
         response = self.client.get(reverse('store:book_detail', args=['django-beginners']))
@@ -42,16 +45,17 @@ class TestViewResponses(TestCase):
 
     def test_homepage_html(self):
         request = HttpRequest()
-        response = all_books(request)
+        response = book_all(request)
         html = response.content.decode('utf-8')
-        self.assertIn('<title>Home</title>', html)
+        self.assertIn('<title>Book Store</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
 
     def test_view_function(self):
         request = self.factory.get("/django-beginners")
-        response = all_books(request)
+        response = book_all(request)
         html = response.content.decode('utf-8')
-        self.assertIn('<title>Home</title>', html)
+        self.assertIn('<title>Book Store</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
+
