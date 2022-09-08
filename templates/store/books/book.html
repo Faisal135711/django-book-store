@@ -34,13 +34,38 @@
                             </select>
 
                         </div>
-                        <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Add to
-                                basket</button></div>
+                        <div class="col-6 text-end">
+                            <button type="button" id="add-button" value="{{ book.id }}" 
+                                class="btn btn-secondary btn-sm">Add to basket
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 </div>
+
+<script>
+    $(document).on('click', '#add-button', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "basket:basket_add" %}',
+            data: {
+                bookId: $('#add-button').val(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            success: function(data){
+
+            },
+            error: function(xhr, errmsg, err){
+
+            }
+        });
+    })
+</script>
+
 {% endblock content %}
 
