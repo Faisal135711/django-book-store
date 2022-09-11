@@ -27,10 +27,10 @@
                         <div class="col-6">
                             <label for="select">Qty</label>
                             <select id="select">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                             </select>
 
                         </div>
@@ -54,11 +54,13 @@
             url: '{% url "basket:basket_add" %}',
             data: {
                 bookId: $('#add-button').val(),
+                bookQty: $('#select').val(),
                 csrfmiddlewaretoken: "{{csrf_token}}",
                 action: 'post'
             },
             success: function(data){
-
+                console.log(data)
+                $('#basket_qty').html(data.qty);
             },
             error: function(xhr, errmsg, err){
 

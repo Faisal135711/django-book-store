@@ -6,8 +6,11 @@ class BasketSession():
             basket = self.session['skey'] = {}
         self.basket = basket
 
-    def add(self, book):
+    def add(self, book, qty):
         book_id = book.id
         if book_id not in self.basket:
-            self.basket[book_id] = {'price': float(book.price)}
+            self.basket[book_id] = {'price': float(book.price), 'qty': int(qty)}
         self.session.modified = True
+
+    def __len__(self):
+        return sum(item['qty'] for item in self.basket.values())

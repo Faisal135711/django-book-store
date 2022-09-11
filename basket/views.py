@@ -14,7 +14,8 @@ def basket_add(request):
     basket = BasketSession(request)
     if request.POST.get('action') == 'post':
         book_id = int(request.POST.get('bookId'))
+        book_qty = int(request.POST.get('bookQty'))
         book = get_object_or_404(Book, id=book_id)
-        basket.add(book=book)
-        response = JsonResponse({'test': 'data'})
+        basket.add(book=book, qty=book_qty)
+        response = JsonResponse({'qty': book_qty})
         return response
