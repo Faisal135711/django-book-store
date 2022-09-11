@@ -63,7 +63,11 @@
           </ul>
           <a type="button" role="button" href="{% url "basket:basket_summary" %}"
                         class="btn btn-outline-secondary">
-            <div id="basket_qty" class="d-inline-flex"></div>
+            {% with total_qty=basket|length %}
+              <div id="basket-qty" class="d-inline-flex">
+                  {{ total_qty }}
+              </div>
+            {% endwith %}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-cart3" viewBox="0 0 16 16">
                 <path
