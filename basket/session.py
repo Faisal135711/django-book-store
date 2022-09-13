@@ -9,13 +9,20 @@ class BasketSession():
         if 'skey' not in request.session:
             basket = self.session['skey'] = {}
         self.basket = basket
-        
+
 
     def add(self, book, qty):
         book_id = book.id
         if book_id not in self.basket:
             self.basket[book_id] = {'price': str(book.price), 'qty': int(qty)}
-        self.session.modified = True
+        self.save()
+
+
+    def delete(self, book):
+        book_id = str(book)
+        if book_id in self.basket:
+            del self.basket[book_id]
+            self.save()
 
 
     def __iter__(self):
@@ -38,3 +45,7 @@ class BasketSession():
 
     def get_total_price(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.basket.values())
+
+
+    def save(self):
+        self.session.modified = True

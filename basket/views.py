@@ -21,3 +21,16 @@ def basket_add(request):
         basketQty = basket.__len__()
         response = JsonResponse({'qty': basketQty})
         return response
+
+
+def basket_delete(request):
+    basket = BasketSession(request)
+    if request.POST.get('action') == 'post':
+        print(request.POST)
+        book_id = int(request.POST.get('bookId'))
+        basket.delete(book=book_id)
+        
+        basketqty = basket.__len__()
+        baskettotal = basket.get_total_price()
+        response = JsonResponse({'qty': basketqty, 'subtotal': baskettotal})
+        return response
