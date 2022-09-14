@@ -26,11 +26,23 @@ def basket_add(request):
 def basket_delete(request):
     basket = BasketSession(request)
     if request.POST.get('action') == 'post':
-        print(request.POST)
         book_id = int(request.POST.get('bookId'))
         basket.delete(book=book_id)
         
         basketqty = basket.__len__()
         baskettotal = basket.get_total_price()
-        response = JsonResponse({'qty': basketqty, 'subtotal': baskettotal})
+        response = JsonResponse({"Success": True})
+        return response
+
+
+def basket_update(request):
+    basket = BasketSession(request)
+    if request.POST.get('action') == 'post':
+        book_id = int(request.POST.get('bookId'))
+        book_qty = int(request.POST.get('bookQty'))
+        basket.update(book=book_id, qty=book_qty)
+
+        basketQty = basket.__len__()
+        basketTotal = basket.get_total_price()
+        response = JsonResponse({"qty": basketQty, "subtotal": basketTotal})
         return response
