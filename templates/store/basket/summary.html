@@ -73,7 +73,9 @@
               action: 'post'
           },
           success: function(data){
-            $('.product-item[data-index="' + bookId + '"]').remove()
+            $('.product-item[data-index="' + bookId + '"]').remove();
+            $("#basket-qty").html(data.qty);
+            $("#subtotal").html(data.subtotal);
           },
           error: function(xhr, errmsg, err){
           }
