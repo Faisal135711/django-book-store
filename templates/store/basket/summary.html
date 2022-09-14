@@ -20,7 +20,7 @@
           <div class="col border-bottom">
             <div class="row p-3">
               <div class="col-6">Hardback Book</div>
-              <div class="col-6 text-end"><span class="h6 fw-bold">£{{ item.total_price }}</span></div>
+              <div class="col-6 text-end"><span class="h6 fw-bold">£{{ book.price }}</span></div>
             </div>
           </div>
           <div class="col">
@@ -63,7 +63,6 @@
       e.preventDefault();
 
       let bookId = $(this).data('index')
-      console.log(bookId)
       
       $.ajax({
           type: 'POST',
@@ -77,10 +76,34 @@
             $('.product-item[data-index="' + bookId + '"]').remove()
           },
           error: function(xhr, errmsg, err){
-
           }
       });
   })
+
+  $(document).on('click', '.update-button', function(e){
+    e.preventDefault();
+
+    let bookId = $(this).data('index')
+    
+    $.ajax({
+        type: 'POST',
+        url: '{% url "basket:basket_update" %}',
+        data: {
+            bookId: $(this).data('index'),
+            bookQty: $('#select' + bookId + ' option:selected').text(),
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            action: 'post'
+        },
+        success: function(data){
+          $("#basket-qty").html(data.qty);
+          $("#subtotal").html(data.subtotal);
+        },
+        error: function(xhr, errmsg, err){
+        }
+    });
+  })
+
+  
 </script>
 
 {% endblock %}
