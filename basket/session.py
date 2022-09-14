@@ -25,6 +25,13 @@ class BasketSession():
             self.save()
 
 
+    def update(self, book, qty):
+        book_id = str(book)
+        if book_id in self.basket:
+            self.basket[book_id]['qty'] = qty
+        self.save()
+
+
     def __iter__(self):
         book_ids = self.basket.keys()
         books = Book.books.filter(id__in=book_ids)
