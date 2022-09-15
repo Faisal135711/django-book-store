@@ -1,5 +1,8 @@
 from unittest import skip
 
+from importlib import import_module
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.test import Client, RequestFactory, TestCase
@@ -39,23 +42,20 @@ class TestViewResponses(TestCase):
         response = self.client.get(reverse('store:book_detail', args=['django-beginners']))
         self.assertEqual(response.status_code, 200)
 
+
     def test_category_detail_url(self):
         response = self.client.get(reverse('store:category_detail', args=['django']))
         self.assertEqual(response.status_code, 200)
+        
 
     def test_homepage_html(self):
         request = HttpRequest()
+        engine = import_module(settings.SESSION_ENGINE)
+        request.session = engine.SessionStore()
         response = book_all(request)
         html = response.content.decode('utf-8')
         self.assertIn('<title>Book Store</title>', html)
         self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
         self.assertEqual(response.status_code, 200)
 
-    def test_view_function(self):
-        request = self.factory.get("/django-beginners")
-        response = book_all(request)
-        html = response.content.decode('utf-8')
-        self.assertIn('<title>Book Store</title>', html)
-        self.assertTrue(html.startswith('\n<!DOCTYPE html>\n'))
-        self.assertEqual(response.status_code, 200)
-
+    
