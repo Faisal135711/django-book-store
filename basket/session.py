@@ -12,9 +12,12 @@ class BasketSession():
 
 
     def add(self, book, qty):
-        book_id = book.id
+        book_id = str(book.id)
         if book_id not in self.basket:
             self.basket[book_id] = {'price': str(book.price), 'qty': int(qty)}
+        else:
+            self.basket[book_id]['qty'] = int(qty)
+
         self.save()
 
 
