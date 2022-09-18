@@ -7,7 +7,7 @@ from store.models import Book
 
 
 def basket_summary(request):
-    return render(request, 'store/basket/summary.html')
+    return render(request, 'basket/summary.html')
 
 
 def basket_add(request):

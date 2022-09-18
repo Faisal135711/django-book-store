@@ -5,37 +5,40 @@
 {% endblock title %}
 {% block content %}
 <main>
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="pb-3 h5">{{ category.name | title }}</div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-        {% for book in books %}
+  <div class="container">
+    <div class="row">
+      <div class="album py-5">
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img
-              class="img-fluid"
-              alt="Responsive image"
-              src="{{ book.image.url }}"
-            />
-            <div class="card-body">
-              <p class="card-text">
-                <a
-                  class="text-dark text-decoration-none"
-                  href="{{ book.get_absolute_url }}"
-                  >{{ book.title }}</a
-                >
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">9min read</small>
+
+        <div class="pb-3"><h1 class="h3">Popular</h1></div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+          {% for book in books %}
+
+          <div class="col">
+            <div class="card border-0">
+              <img class="img-fluid" alt="Responsive image" src="{{ book.image.url }}">
+              <div class="card-body px-0">
+                <p class="card-text">
+                  <a class="text-dark text-decoration-none"
+                    href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">£{{book.price}}</small>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {% endfor %}
+          {% endfor %}
+
+        </div>
       </div>
     </div>
+
   </div>
+
+
 </main>
+
 {% endblock content %}
