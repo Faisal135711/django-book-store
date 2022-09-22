@@ -57,3 +57,7 @@ def account_activate(request, uidb64, token):
         return render(request, 'account/registration/activation_invalid.html')
 
 
+@login_required
+def dashboard(request):
+    # orders = user_orders(request)
+    return render(request, 'account/user/dashboard.html')
