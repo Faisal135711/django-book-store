@@ -1,5 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 
 from account import views
 from account.forms import UserLoginForm
@@ -14,4 +15,6 @@ urlpatterns = [
     path("activate/<slug:uidb64>/<slug:token>/", views.account_activate, name='activate'),
     path("dashboard/", views.dashboard, name='dashboard'),
     path("profile/edit/", views.edit_details, name='edit_details'),
+    path("profile/delete_user/", views.delete_user, name='delete_user'),
+    path("profile/delete_confirm/", TemplateView.as_view(template_name='account/user/delete_confirm.html'), name='delete_confirm'),
 ]
