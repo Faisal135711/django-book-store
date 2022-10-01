@@ -40,6 +40,7 @@
 
                                 <label class="form-label">{{ form.password.label}}</label>
                                 {{ form.password}}
+                                <a class="primary" href="{% url 'account:pwdreset' %}">Forgot Password?</a>
                                 <div class="d-grid gap-2">
                                     <input type="hidden" name="next" value="{{ next }}">
                                     <button class="btn btn-primary py-2 mb-4 mt-5 fw-bold" type="submit" value="Log-in">Sign in
