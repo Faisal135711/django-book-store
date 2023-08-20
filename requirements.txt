@@ -1,6 +1,6 @@
 asgiref==3.5.2
 coverage==6.4.4
-Django==4.1
+Django==4.1.10
 django-countries==7.3.2
 flake8==5.0.4
 flake8-isort==4.2.0
